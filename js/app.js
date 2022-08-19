@@ -39,9 +39,9 @@
 */
 
 // build the nav
-
+const sections = document.querySelectorAll('section');
 const nav = document.getElementById('navbar__list');
-for(let i = 1 ; i <= 4 ; i++){
+for(let i = 1 ; i <= sections.length ; i++){
    let sec = document.createElement('li');
    let move = document.createElement('a');
    move.href = `#section${i}`;
@@ -52,7 +52,6 @@ for(let i = 1 ; i <= 4 ; i++){
 }
 
 // Add class 'active' to section when near top of viewport
-const sections = document.querySelectorAll('section');
 window.addEventListener('scroll' , ()=> {
    let current = '';
    sections.forEach(section => {
