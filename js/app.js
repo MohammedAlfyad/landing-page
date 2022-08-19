@@ -41,10 +41,10 @@
 // build the nav
 const sections = document.querySelectorAll('section');
 const nav = document.getElementById('navbar__list');
-for(let i = 1 ; i <= sections.length ; i++){
+for (let i = 1; i <= sections.length; i++) {
    let sec = document.createElement('li');
    let move = document.createElement('a');
-   move.href = `#section${i}`;
+   move.href = `#${sections[i-1].id}`;
    move.innerText = `Section ${i}`;
    move.className = "nav_link";
    sec.appendChild(move);
@@ -52,17 +52,17 @@ for(let i = 1 ; i <= sections.length ; i++){
 }
 
 // Add class 'active' to section when near top of viewport
-window.addEventListener('scroll' , ()=> {
+window.addEventListener('scroll', () => {
    let current = '';
    sections.forEach(section => {
       const sectiontop = section.offsetTop;
-      if(pageYOffset > sectiontop){
+      if (pageYOffset > sectiontop) {
          current = section.getAttribute('id');
       }
    })
    sections.forEach(section => {
       section.classList.remove('active');
-      if(section.id === current){
+      if (section.id === current) {
          section.classList.add('active');
       }
    })
@@ -85,18 +85,18 @@ window.addEventListener('scroll' , ()=> {
 var mybutton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () { scrollFunction() };
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
+   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      mybutton.style.display = "block";
+   } else {
+      mybutton.style.display = "none";
+   }
 }
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+   document.body.scrollTop = 0;
+   document.documentElement.scrollTop = 0;
 }
 
 // Set sections as active
