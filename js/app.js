@@ -52,31 +52,36 @@ for (let i = 1; i <= sections.length; i++) {
 }
 
 // Add class 'active' to section when near top of viewport
-window.addEventListener('scroll', () => {
-   let current = '';
-   sections.forEach(section => {
-      const sectiontop = section.offsetTop;
-      if (pageYOffset > sectiontop) {
-         current = section.getAttribute('id');
-      }
-   })
-   sections.forEach(section => {
-      section.classList.remove('active');
-      if (section.id === current) {
-         section.classList.add('active');
-      }
-   })
-})
+
+// on window scroll
+window.addEventListener('scroll', (e) => { 
+   // loop through each section
+   sections.forEach( section => {
+ 
+     // get px distance from top
+     const topDistance = section.getBoundingClientRect().top;
+ 
+     // if the distance to the top is between -500 - 100px
+     if (topDistance > -500 && topDistance < 100) {
+       section.classList.add('active');
+     // otherwise, remove the class
+     } else {
+       section.classList.remove('active');
+     }
+   });
+ });
 
 // Scroll to anchor ID using scrollTO event
-$('.nav_link').click(function(e){
+
+document.getElementById('nav--bar').addEventListener('click', function (e) {
    e.preventDefault();
-   var target = $($(this).attr('href'));
-   if(target.length){
-     var scrollTo = target.offset().top;
-     $('body, html').animate({scrollTop: scrollTo+'px'}, 50);
+   const target = e.target;
+   if (target.classList.contains('nav_link')) {
+       const id = target.getAttribute('href').slice(1);
+       document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
    }
- });
+});
+
 
 /**
  * End Main Functions
